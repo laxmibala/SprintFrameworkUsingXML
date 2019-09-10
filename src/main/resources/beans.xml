@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <!--  <bean id="airtel"  class="MobileServices.Airtel">
+        <constructor-arg name="internetSpeed" value="3G"/>
+        <property name="services">
+            <bean class="MobileServices.PostpaidService"></bean> //tightly coupled
+        </property>
+    </bean>-->
+    <bean id ="prepaidservices" class="MobileServices.PrepaidService"></bean>
+    <bean id ="postpaidservices" class="MobileServices.PostpaidService"></bean>
+    <bean id ="addContact" class="MobileServices.Contact"></bean>
+    <bean id="sim"  class="MobileServices.Vodaphone">
+        <property name="internetSpeed" value="4G"/>
+        <property name="services" ref="prepaidservices"/>
+    </bean>
+
+    <bean id="airtel"  class="MobileServices.Airtel">
+        <constructor-arg name="internetSpeed" value="3G"/>
+        <property name="services" ref="postpaidservices"/>
+        <property name="contact" ref="addContact"/>
+
+    </bean>
+
+
+
+
+
+
+</beans>
